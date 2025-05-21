@@ -10,7 +10,9 @@ public interface IEmployeeService {
 
     public Employee saveOneEmployee(Employee employee);
 
-    public Employee getOneEmployee(Long id);
+    public Employee getOneEmployeeById(Long id);
+
+    public Employee getOneEmployeeByMatricule(String matricule);
 
     public void deleteEmployee(Long id);
 

@@ -21,13 +21,14 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee saveOneEmployee(Employee employee) {
-
-        employee.setMatricule
-                (
-                        UUID.randomUUID().toString().substring(0,4).toUpperCase()
-                                +employee.getLastName().substring(0,2).toUpperCase()
-                                +employee.getFirstName().substring(0,2).toUpperCase()
-                );
+        if (employee.getId() == null){
+            employee.setMatricule
+                    (
+                            UUID.randomUUID().toString().substring(0,4).toUpperCase()
+                                    +employee.getLastName().substring(0,2).toUpperCase()
+                                    +employee.getFirstName().substring(0,2).toUpperCase()
+                    );
+        }
         return employeeRepository.save(employee);
     }
     /*Initialize your Date however you like it.
@@ -50,9 +51,34 @@ calendar.setTime(date);
      des données dans les systèmes informatiques.*/
 
     @Override
-    public Employee getOneEmployee(Long id) {
+    public Employee getOneEmployeeById(Long id) {
         return employeeRepository.findById(id).get();
     }
+
+    @Override
+    public Employee getOneEmployeeByMatricule(String matricule) {
+        return employeeRepository.findByMatricule(matricule).get();
+    }
+//
+//    @Override
+//    public Employee getOneEmployee(Long id) {
+//        return employeeRepository.findById(id).get();
+//    }
+//
+//    @Override
+//    public Employee getOneEmployee(Long id) {
+//        return employeeRepository.findById(id).get();
+//    }
+//
+//    @Override
+//    public Employee getOneEmployee(Long id) {
+//        return employeeRepository.findById(id).get();
+//    }
+//
+//    @Override
+//    public Employee getOneEmployee(Long id) {
+//        return employeeRepository.findById(id).get();
+//    }
 
     @Override
     public void deleteEmployee(Long id) {
