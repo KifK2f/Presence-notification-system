@@ -18,6 +18,7 @@ public class Presence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "action_date")
     private LocalDate date;
 
     @Column(name = "heure")
@@ -25,7 +26,7 @@ public class Presence {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type_mouvement", nullable = false)
-    private Movement movement;
+    private ActionType actionType;
 
     @ManyToOne //Many presence To One Employee
     @JoinColumn(name = "employee_id")
@@ -55,12 +56,12 @@ public class Presence {
         this.hour = hour;
     }
 
-    public Movement getMovement() {
-        return movement;
+    public ActionType getActionType() {
+        return actionType;
     }
 
-    public void setMovement(Movement movement) {
-        this.movement = movement;
+    public void setActionType(ActionType actionType) {
+        this.actionType = actionType;
     }
 
     public Employee getEmployee() {
@@ -77,7 +78,7 @@ public class Presence {
                 "id=" + id +
                 ", date=" + date +
                 ", hour=" + hour +
-                ", movement=" + movement +
+                ", actionType=" + actionType +
                 ", employee=" + employee +
                 '}';
     }

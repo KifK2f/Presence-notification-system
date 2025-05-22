@@ -32,7 +32,7 @@ public class PresenceController {
     }
 
     @PutMapping("/presence/{id}")
-    public Presence updatePresence(@PathVariable Long id, Presence presence){
+    public Presence updatePresence(@PathVariable Long id, @RequestBody Presence presence){
         presence.setId(id);
         return presenceService.saveOnePresence(presence);
     }
