@@ -12,6 +12,9 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Presence", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"employe_id", "date", "actionType"})
+})
 public class Presence {
 
     @Id

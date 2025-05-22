@@ -59,26 +59,6 @@ calendar.setTime(date);
     public Employee getOneEmployeeByMatricule(String matricule) {
         return employeeRepository.findByMatricule(matricule).get();
     }
-//
-//    @Override
-//    public Employee getOneEmployee(Long id) {
-//        return employeeRepository.findById(id).get();
-//    }
-//
-//    @Override
-//    public Employee getOneEmployee(Long id) {
-//        return employeeRepository.findById(id).get();
-//    }
-//
-//    @Override
-//    public Employee getOneEmployee(Long id) {
-//        return employeeRepository.findById(id).get();
-//    }
-//
-//    @Override
-//    public Employee getOneEmployee(Long id) {
-//        return employeeRepository.findById(id).get();
-//    }
 
     @Override
     public void deleteEmployee(Long id) {

@@ -13,8 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Employe",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"nom", "prenom"},
-                        name = "UK_employee_name") // Ici c'est le Nom de la contrainte pour la DB (optionnel),UK= Abbreviation de Unique key
+                @UniqueConstraint(columnNames = {"nom", "prenom"}, name = "UK_Nom_Prenom")
         }
 )
 public class Employee {
