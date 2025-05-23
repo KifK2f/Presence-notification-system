@@ -39,18 +39,37 @@ public Presence saveOnePresence(Presence presence) {
 
     presence.setEmployee(employee);
 
-    // Vérifie si l'employé a déjà une présence aujourd'hui
-    boolean hasPresenceToday = presenceRepository.existsByEmployeeIdAndDate(employeeId, LocalDate.now());
+    LocalDate today = LocalDate.now();
 
-    if (!hasPresenceToday) {
-        presence.setActionType(ActionType.ARRIVEE);
-    } else {
-        if (presence.getActionType() == null) {
-            throw new RuntimeException("Veuillez spécifier une action différente de ARRIVEE.");
+    // ARRIVEE spécifique : autorisée uniquement si aucune présence aujourd’hui
+    if (presence.getActionType() == ActionType.ARRIVEE) {
+        boolean hasArrivee = presenceRepository.existsByEmployeeIdAndActionTypeAndDate(employeeId, ActionType.ARRIVEE, today);
+        if (hasArrivee) {
+            throw new RuntimeException("Vous avez déjà une ARRIVEE enregistrée aujourd'hui.");
         }
+    }
 
-        if (presence.getActionType() == ActionType.ARRIVEE) {
-            throw new RuntimeException("L'employé a déjà une ARRIVEE aujourd'hui. Veuillez choisir une autre action.");
+    // DEPART
+    if (presence.getActionType() == ActionType.DEPART) {
+        boolean hasDepart = presenceRepository.existsByEmployeeIdAndActionTypeAndDate(employeeId, ActionType.DEPART, today);
+        if (hasDepart) {
+            throw new RuntimeException("Vous avez déjà un DEPART enregistré aujourd'hui.");
+        }
+    }
+
+    // SORTIE_PAUSE
+    if (presence.getActionType() == ActionType.SORTIE_PAUSE) {
+        boolean hasSortiePause = presenceRepository.existsByEmployeeIdAndActionTypeAndDate(employeeId, ActionType.SORTIE_PAUSE, today);
+        if (hasSortiePause) {
+            throw new RuntimeException("Vous avez déjà une SORTIE_PAUSE enregistrée aujourd'hui.");
+        }
+    }
+
+    // RETOUR_PAUSE
+    if (presence.getActionType() == ActionType.RETOUR_PAUSE) {
+        boolean hasRetourPause = presenceRepository.existsByEmployeeIdAndActionTypeAndDate(employeeId, ActionType.RETOUR_PAUSE, today);
+        if (hasRetourPause) {
+            throw new RuntimeException("Vous avez déjà un RETOUR_PAUSE enregistré aujourd'hui.");
         }
     }
 
